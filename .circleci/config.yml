@@ -8,6 +8,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install and Make
+          name: Install and test
           command: npm install && make test-coverage
       - coveralls/upload
