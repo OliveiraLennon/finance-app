@@ -4,7 +4,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: 'circleci/node:10.0.0'
+      - image: 'circleci/node:14.17.6'
     steps:
       - checkout
       - run:
