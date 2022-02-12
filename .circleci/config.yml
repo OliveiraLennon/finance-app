@@ -10,7 +10,7 @@ jobs:
           cache-path: ~/project/node_modules
           override-ci-command: npm install
       - run: sudo npm install -g npm@latest
-      - run: eslint 'src/**'
+      - run: npx eslint 'src/**'
       - run: npm run test:coveralls
 workflows:
   dev:
