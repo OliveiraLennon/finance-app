@@ -11,8 +11,6 @@ jobs:
           override-ci-command: npm install
       - run: sudo npm install -g npm@latest
       - run: npx eslint 'src/**'
-orbs: 
-  coveralls: coveralls/coveralls@1.0.6
 workflows:
   dev:
     jobs:
