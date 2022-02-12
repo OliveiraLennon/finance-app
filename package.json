@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:staged": "jest",
-    "test:coveralls": "jest && coveralls < coverage/lcov.info"
+    "test:staged": "jest"
   },
   "keywords": [],
   "author": "",
