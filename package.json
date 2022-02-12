@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --passWithNoTests",
-    "test:staged": "jest --passWithNoTests"
+    "test:staged": "jest --passWithNoTests",
+    "test:coveralls": "npm run test && coveralls < coverage/lcov.info"
   },
   "keywords": [],
   "author": "",
