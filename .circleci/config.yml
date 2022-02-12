@@ -9,5 +9,5 @@ jobs:
       - checkout
       - run:
           name: Install and test
-          command: npm install && make test-coverage
+          command: npm install && npm run test
       - coveralls/upload
