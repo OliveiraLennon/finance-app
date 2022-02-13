@@ -1,21 +1,42 @@
-version: '2.1'
+version: 2.1
 orbs:
-  node: circleci/node@5.0.0
-  coveralls: coveralls/coveralls@1.0.4
+  coveralls: coveralls/coveralls@x.y.z
 jobs:
-  development:
-    executor: node/default
+  build-1:
+    docker:
+      - image: 'circleci/node:14.17.6'
     steps:
       - checkout
-      - node/install-packages:
-          cache-path: ~/project/node_modules
-          override-ci-command: npm install
-      - run: sudo npm install -g npm@latest
-      - run: npx eslint 'src/**'
-      - run: npm run test
+      - run:
+          name: Install and Make 1
+          command: npm install && npm run test
       - coveralls/upload:
-          path_to_lcov: ./coverage/lcov.info
+          parallel: true
+          flag_name: Test 1
+  build-2:
+    docker:
+      - image: 'circleci/node:14.17.6'
+    steps:
+      - checkout
+      - run:
+          name: Install and Make 2
+          command: npm install && npm run test
+      - coveralls/upload:
+          parallel: true
+          flag_name: Test 2
+  done:
+    docker:
+      - image: 'circleci/node:14.17.6'
+    steps:
+      - coveralls/upload:
+          parallel_finished: true
 workflows:
-  dev:
+  test_parallel_then_upload:
     jobs:
-      - development
+      - build-1
+      - build-2
+      - done:
+          requires:
+            - build-1
+            - build-2
+
