@@ -13,7 +13,7 @@ jobs:
       - run: sudo npm install -g npm@latest
       - run: npx eslint 'src/**'
       - run: npm run test
-      - coveralls/upload:
+      - coveralls/upload
 workflows:
   dev:
     jobs:
