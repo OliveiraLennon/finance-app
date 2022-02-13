@@ -1,6 +1,7 @@
 version: '2.1'
 orbs:
   node: circleci/node@5.0.0
+  coveralls: coveralls/coveralls@1.0.4
 jobs:
   development:
     executor: node/default
@@ -12,6 +13,8 @@ jobs:
       - run: sudo npm install -g npm@latest
       - run: npx eslint 'src/**'
       - run: npm run test
+      - coveralls/upload:
+          path_to_lcov: ./coverage/lcov.info
 workflows:
   dev:
     jobs:
