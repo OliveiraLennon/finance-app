@@ -14,7 +14,7 @@ jobs:
       - run: npx eslint 'src/**'
       - run: npm run test
       - coveralls/upload:
-          path_to_lcov: ./coverage/lcov.info
+          path_to_lcov: ./coverage/lcov.in
 workflows:
   dev:
     jobs:
