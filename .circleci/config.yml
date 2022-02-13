@@ -1,9 +1,10 @@
-version: '2.1'
+version: 2.1
 orbs:
-  node: circleci/node@5.0.0
+  coveralls: coveralls/coveralls@1.0.6
 jobs:
-  development:
-    executor: node/default
+  build:
+    docker:
+      - image: 'circleci/node:14.17.6'
     steps:
       - checkout
       - node/install-packages:
