@@ -1,42 +1,56 @@
 version: 2.1
+
 orbs:
-  coveralls: coveralls/coveralls@1.0.4
+  coveralls: coveralls/coveralls@1.0.5
+  node: circleci/node@1.1.6
+
 jobs:
   build-1:
-    docker:
-      - image: 'circleci/node:14.17.6'
+    executor:
+      name: node/default
+
     steps:
       - checkout
-      - run:
-          name: Install and Make 1
-          command: npm install && npm run test:coveralls
+
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm run test
       - coveralls/upload:
           parallel: true
           flag_name: Test 1
+          verbose: true
+
   build-2:
-    docker:
-      - image: 'circleci/node:14.17.6'
+    executor:
+      name: node/default
+
     steps:
       - checkout
-      - run:
-          name: Install and Make 2
-          command: npm install && npm run test:coveralls
+
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm run test
+
       - coveralls/upload:
           parallel: true
           flag_name: Test 2
+          verbose: true
+
   done:
-    docker:
-      - image: 'circleci/node:14.17.6'
+    executor:
+      name: node/default
+
     steps:
       - coveralls/upload:
           parallel_finished: true
+
 workflows:
   test_parallel_then_upload:
     jobs:
       - build-1
       - build-2
       - done:
-          requires:
-            - build-1
-            - build-2
+          requires: [build-1, build-2]
 
