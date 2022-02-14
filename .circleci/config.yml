@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Install and Make 1
-          command: npm install && npm run test
+          command: npm install && npm run test:coveralls
       - coveralls/upload:
           parallel: true
           flag_name: Test 1
@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: Install and Make 2
-          command: npm install && npm run test
+          command: npm install && npm run test:coveralls
       - coveralls/upload:
           parallel: true
           flag_name: Test 2
